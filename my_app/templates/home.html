@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Home - My Django App</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Welcome to My Django App</h1>
+    <p>This is a demo home page template.</p>
+    <p>Current time: {{ current_time }}</p>
+
+    <h1> Hello {{ request.user.username }}, welcome </h1>
+    <p>Age : {{ age }} </p>
+    {% for i in nums %}
+    <p> {{ i }} </p>
+    {%  endfor %}
+    <a class='btn btn-danger' href="{%url 'logout' %}">Logout</a>
+{% endblock content%}

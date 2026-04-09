@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Posts - </title>
+{% endblock title %}
+
+{% block content %}
+    <h1>Posts</h1>
+    
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+    {% for post in post_list %}
+        <div class="card" style="width: 20rem; ">
+  <img src="{{ post.image.url }}" class="card-img-top" alt="Image for {{ post.title }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.content | linebreaks}}</p>
+    <p class="card-text"><small class="text-muted">Last updated: {{ post.updated_at }}</small></p>
+    <a href="{% url 'read_post' post.id %}" class="btn btn-primary">Read more</a>
+  </div>
+</div>
+    {% endfor %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Posts - </title>
+{% endblock title %}
+
+{% block content %}
+    <h1>Read Post</h1>
+    
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+    
+        <div class="card" style="width: 20rem; ">
+  <img src="{{ post.image.url }}" class="card-img-top" alt="Image for {{ post.title }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.content | linebreaks }} </p>
+    <p class="card-text"><small class="text-muted">Last updated: {{ post.updated_at }}</small></p>
+    <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small></p>
+    {% if request.user == post.author %}
+    <a href="{% url "update_post" post.id %}" class="btn btn-primary">Update</a>
+    <form method="post" action="{% url 'delete_post' post.id %}" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    {% endif  %}
+  </div>
+</div>
+   
+    </div>
+{% endblock content %}

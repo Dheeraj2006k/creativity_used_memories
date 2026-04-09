@@ -1,0 +1,16 @@
+{% extends  'base.html' %}
+
+{% block title %}
+<title class="form_label">Register - My Django App</title>
+{% endblock %}
+
+{% block  content %}
+    <div class="container">
+        <h1>Register</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success" type="submit">Register</button>
+        </form>
+    </div>
+{% endblock content %}

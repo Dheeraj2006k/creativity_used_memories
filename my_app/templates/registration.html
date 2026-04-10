@@ -1,16 +1,23 @@
 {% extends  'base.html' %}
 
 {% block title %}
-<title class="form_label">Register - My Django App</title>
+Register
 {% endblock %}
 
 {% block  content %}
-    <div class="container">
-        <h1>Register</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-success" type="submit">Register</button>
-        </form>
-    </div>
+    <section class="auth-shell">
+        <div class="auth-card">
+            <p class="section-kicker">Create account</p>
+            <h1 class="auth-title">Join the memory board.</h1>
+            <p class="auth-text">Make an account to post stories, upload moments, and stay connected with your circle.</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="inline-actions mt-4">
+                    <button class="btn btn-success" type="submit">Register</button>
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Already have an account?</a>
+                </div>
+            </form>
+        </div>
+    </section>
 {% endblock content %}

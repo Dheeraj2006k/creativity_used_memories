@@ -1,30 +1,49 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <title>Posts - </title>
+{{ post.title }}
 {% endblock title %}
 
 {% block content %}
-    <h1>Read Post</h1>
-    
-    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-    
-        <div class="card" style="width: 20rem; ">
-  <img src="{{ post.image.url }}" class="card-img-top" alt="Image for {{ post.title }}">
-  <div class="card-body">
-    <h5 class="card-title">{{ post.title }}</h5>
-    <p class="card-text">{{ post.content | linebreaks }} </p>
-    <p class="card-text"><small class="text-muted">Last updated: {{ post.updated_at }}</small></p>
-    <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small></p>
-    {% if request.user == post.author %}
-    <a href="{% url "update_post" post.id %}" class="btn btn-primary">Update</a>
-    <form method="post" action="{% url 'delete_post' post.id %}" style="display: inline;">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
-    {% endif  %}
-  </div>
-</div>
-   
-    </div>
+    <article class="story-card">
+        <div class="story-layout">
+            <div class="story-body">
+                <p class="section-kicker">Full story</p>
+                <div class="story-meta">By {{ post.author.username }}</div>
+                <h1 class="story-title">{{ post.title }}</h1>
+                <p class="post-subtitle">{{ post.subtitle }}</p>
+
+                <dl class="meta-list">
+                    <div>
+                        <dt>Published</dt>
+                        <dd>{{ post.created_at|date:"M d, Y" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Updated</dt>
+                        <dd>{{ post.updated_at|date:"M d, Y" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Author</dt>
+                        <dd>{{ post.author.username }}</dd>
+                    </div>
+                </dl>
+
+                <div class="story-text">{{ post.content|linebreaks }}</div>
+
+                <div class="inline-actions">
+                    <a href="{% url 'posts' %}" class="btn btn-outline-secondary">Back to Posts</a>
+                    {% if request.user == post.author %}
+                    <a href="{% url 'update_post' post.id %}" class="btn btn-primary">Edit Post</a>
+                    <form method="post" action="{% url 'delete_post' post.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete Post</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <img src="{{ post.image.url }}" class="story-image" alt="Image for {{ post.title }}">
+            </div>
+        </div>
+    </article>
 {% endblock content %}

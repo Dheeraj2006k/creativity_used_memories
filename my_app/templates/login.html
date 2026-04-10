@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Login - My Django App</title>
+Login
 {% endblock %}
 
 {% block content %}
-
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button class ='btn btn-primary' type="submit">Login</button>
-    </form>
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
-
-
+    <section class="auth-shell">
+        <div class="auth-card">
+            <p class="section-kicker">Welcome back</p>
+            <h1 class="auth-title">Sign in and keep the memories flowing.</h1>
+            <p class="auth-text">Log in to read posts, write your own updates, and manage the stories you shared.</p>
+            <form method="post">
+                {% csrf_token %}
+                <p>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </p>
+                <p>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </p>
+                <div class="inline-actions mt-4">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <a href="{% url 'register' %}" class="btn btn-outline-secondary">Create Account</a>
+                </div>
+            </form>
+            {% if error_message %}
+                <div class="alert-inline">{{ error_message }}</div>
+            {% endif %}
+        </div>
+    </section>
 {% endblock content %}

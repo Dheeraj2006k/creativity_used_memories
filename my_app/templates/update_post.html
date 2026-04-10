@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Update Post</title>
+Update Post
 {% endblock title%}
 
 {% block content %}
-    <h1>Update Post</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        
-        <button class="btn btn-primary" type="submit">Update</button>
-    </form>
+    <section class="form-shell">
+        <div class="form-card">
+            <p class="section-kicker">Edit memory</p>
+            <h1 class="form-title">Refresh the details without losing the moment.</h1>
+            <p class="form-text">Update the wording, image, or subtitle so the post feels exactly right.</p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="inline-actions mt-4">
+                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                    <a href="{% url 'posts' %}" class="btn btn-outline-secondary">Back to Posts</a>
+                </div>
+            </form>
+        </div>
+    </section>
 {% endblock content %}

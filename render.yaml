@@ -3,7 +3,7 @@ services:
     name: djangotask-web
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input --upload-unhashed-files
     preDeployCommand: python manage.py migrate
     startCommand: gunicorn djangoTask.wsgi:application
     healthCheckPath: /

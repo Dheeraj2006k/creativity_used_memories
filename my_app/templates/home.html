@@ -1,63 +1,39 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Home
+<title>Home - My Django App</title>
 {% endblock %}
 
 {% block content %}
-    <section class="hero-panel">
-        <div class="hero-grid">
-            <div>
-                <p class="hero-kicker">Memory wall</p>
-                <h1 class="hero-title">Turn everyday moments into stories worth keeping.</h1>
-                <p class="hero-text">
-                    Creativity Used Memories is your small social corner for sharing snapshots, thoughts,
-                    and personal moments with friends. Post something honest, warm, and easy to revisit.
-                </p>
-                <div class="hero-actions">
-                    <a class="btn btn-primary" href="{% url 'posts' %}">Explore Posts</a>
-                    {% if user.is_authenticated %}
-                    <a class="btn btn-outline-secondary" href="{% url 'create_post' %}">Write a New Post</a>
-                    {% else %}
-                    <a class="btn btn-outline-secondary" href="{% url 'register' %}">Join the Space</a>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="feature-stack">
-                <div class="mini-card">
-                    <strong>{% if request.user.is_authenticated %}Welcome back, {{ request.user.username }}{% else %}A calm space for friends{% endif %}</strong>
-                    <span>Share memories with images, captions, and moments that feel personal instead of noisy.</span>
-                </div>
-                <div class="mini-card">
-                    <strong>Simple, warm, and visual</strong>
-                    <span>Use this app like a lightweight photo diary where every post gets its own spotlight.</span>
-                </div>
-                <div class="hero-actions">
-                    <span class="pill-stat">{{ nums|length }} little details on the page</span>
-                    <span class="pill-stat">Age {{ age }}</span>
-                </div>
-            </div>
+    <section class="hero-card">
+        <h1>Welcome to My Django App</h1>
+        <p>This is your simple memory-sharing space where friends can post photos and updates.</p>
+        <div class="quick-links mt-4">
+            <a class="btn btn-primary" href="{% url 'posts' %}">View Posts</a>
+            {% if user.is_authenticated %}
+            <a class="btn btn-outline-secondary" href="{% url 'create_post' %}">Create Post</a>
+            {% else %}
+            <a class="btn btn-outline-secondary" href="{% url 'register' %}">Register</a>
+            {% endif %}
         </div>
     </section>
 
-    <section class="page-panel">
-        <div class="page-grid">
-            <div>
-                <p class="section-kicker">What this space is for</p>
-                <h2 class="section-title">A softer social feed focused on your people.</h2>
-                <p class="section-text">
-                    Instead of endless scrolling, this layout gives each post room to breathe. Friends can
-                    register, log in, upload a memory, and revisit the stories that matter.
-                </p>
+    <section class="page-card">
+        <h2 class="section-title">Hello {{ request.user.username }}, welcome</h2>
+        <p class="section-text">Current time: {{ current_time }}</p>
+        <p class="section-text">Age: {{ age }}</p>
+        <div class="info-grid">
+            {% for i in nums %}
+            <div class="info-card">
+                <h3>Memory Point {{ i }}</h3>
+                <p class="mb-0">A small detail that makes the page feel alive and personal.</p>
             </div>
-            <div class="feature-stack">
-                {% for i in nums %}
-                <div class="note-card">
-                    <strong>Moment {{ i }}</strong>
-                    <span>Every memory can be a quick update, a photo caption, or a longer reflection.</span>
-                </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
+        {% if user.is_authenticated %}
+        <div class="action-row mt-4">
+            <a class='btn btn-danger' href="{% url 'logout' %}">Logout</a>
+        </div>
+        {% endif %}
     </section>
 {% endblock content%}

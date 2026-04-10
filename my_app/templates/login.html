@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Login
+<title>Login - My Django App</title>
 {% endblock %}
 
 {% block content %}
-    <section class="auth-shell">
-        <div class="auth-card">
-            <p class="section-kicker">Welcome back</p>
-            <h1 class="auth-title">Sign in and keep the memories flowing.</h1>
-            <p class="auth-text">Log in to read posts, write your own updates, and manage the stories you shared.</p>
+    <section class="form-shell">
+        <div class="form-card">
+            <h2>Login</h2>
+            <p>Log in to view and manage your posts.</p>
             <form method="post">
                 {% csrf_token %}
                 <p>
@@ -20,8 +19,8 @@ Login
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </p>
-                <div class="inline-actions mt-4">
-                    <button class="btn btn-primary" type="submit">Login</button>
+                <div class="action-row mt-4">
+                    <button class ='btn btn-primary' type="submit">Login</button>
                     <a href="{% url 'register' %}" class="btn btn-outline-secondary">Create Account</a>
                 </div>
             </form>

@@ -6,8 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <title>{% block title %}Creativity Used Memories{% endblock %}</title>
-        
+        <title>{% block title %}My Django App{% endblock %}</title>
     </head>
     <body>
         <div class="site-shell">
@@ -17,8 +16,8 @@
                         <a class="navbar-brand d-flex align-items-center gap-3 me-4" href="{% url 'home' %}">
                             <img src="{% static 'images/logo4.png' %}" class="brand-mark" alt="Logo">
                             <span class="brand-copy">
-                                <span class="brand-eyebrow">Share memories</span>
                                 <span class="brand-title">Creativity Used Memories</span>
+                                <span class="brand-subtitle">Share posts with friends</span>
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +33,7 @@
                                 </li>
                                 {% if user.is_authenticated %}
                                 <li class="nav-item">
-                                    <a class="nav-link nav-pill" href="{% url 'create_post' %}">Create Post</a>
+                                    <a class="nav-link nav-cta" href="{% url 'create_post' %}">Create Post</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -44,7 +43,7 @@
                                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link nav-pill" href="{% url 'register' %}">Register</a>
+                                    <a class="nav-link nav-cta" href="{% url 'register' %}">Register</a>
                                 </li>
                                 {% endif %}
                             </ul>
@@ -52,7 +51,7 @@
                     </div>
                 </nav>
             </header>
-            <main class="page-wrap">
+            <main class="page-wrap main-area">
                 {% block content %}
                 {% endblock %}
             </main>
